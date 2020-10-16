@@ -1,58 +1,60 @@
+import java.util.Arrays;
 import java.util.HashMap;
 
-public class Bibliotheque2 {
+public class Bibliotheque2 implements Bibliotheque {
 
 	private Livre[] liste;
-	int i;
-	
-	Bibliotheque2() 
-	{
-		 this.liste = new Livre[100];
+	private int tailleTab;
+
+	Bibliotheque2() {
+		this.liste = new Livre[100];
+		this.tailleTab = -1;
 	}
 
-	void ajouterLivre(String nom) {
-		Livre l= new Livre(nom);
-		if(i<100)
-		liste[i]=l;
-		i++;
-	
-	}
-		
-	
-
-
-	boolean emprunterLivre(String nom){
-		boolean trouver =false;
-		int k;
-		for(int i=0; i<=liste.length; i++) { 
-//			liste[i]=l;
+	public void ajouter(String nom) {
+		Livre l = new Livre(nom);
+		if (tailleTab < 100) {
+			tailleTab++;
+			liste[tailleTab] = l;
 		}
-		return false;
-	
 	}
-		
 
-	boolean rendreLivre(String nom) {
-		/*Livre l =liste.get(nom);
-		if(l!=null) {
-			l.rendre();	
-			return true;
+	public boolean emprunter(String nom) {
+		boolean trouver = false;
+		for (int i = 0; i <= tailleTab; i++) {
+			Livre l = liste[i];
+			if (l.getNom().equals(nom) && l.isEmprunt()==false) {
+				l.setEmprunt(true);
+				trouver = true;
+			}
 		}
-		else {
-			return false;
-		}*/
-		return true;
+		return trouver;
 	}
 
-	
-
+	public boolean rendre(String nom) {
+		boolean trouver = false;
+		for (int i = 0; i <= tailleTab; i++) {
+			Livre l = liste[i];
+			if (l.getNom().equals(nom) && l.isEmprunt()==true) {
+				l.setEmprunt(false);
+				trouver = true;
+			}
+		}
+		return trouver;
+	}
 
 	@Override
 	public String toString() {
-		return "Bibliotheque [liste=" + liste + "]";
+		return "Bibliotheque2 [liste=" + Arrays.toString(liste) + ", tailleTab=" + tailleTab + "]";
+	}
+
+	@Override
+	public void ajouter(String nom, MediaEnum mediaEnum) {
+		// TODO Auto-generated method stub
+		
 	}
 	
-
-
+		
+	
 
 }

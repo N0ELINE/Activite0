@@ -37,8 +37,12 @@ public class Livre {
 	public String getNom() {
 		return nom;
 	}
-
 	
+	
+
+	public void setEmprunt(boolean emprunt) {
+		this.emprunt = emprunt;
+	}
 
 	public boolean isEmprunt() {
 		return emprunt;

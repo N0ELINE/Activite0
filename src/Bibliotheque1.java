@@ -1,16 +1,16 @@
 import java.util.HashMap;
 
-public class Bibliotheque1 {
+public class Bibliotheque1 implements Bibliotheque {
 
-	HashMap<String, Livre> liste;
+	private HashMap<String, Media> liste;
 
-	void ajouterLivre(String nom) {
+	public void ajouter(String nom) {
 		Livre l= new Livre(nom);
 		liste.put(nom, l);	
 	}
 
 
-	boolean emprunterLivre(String nom){
+	public boolean emprunter(String nom){
 		Livre l =liste.get(nom);
 		
 		if(l!=null) {
@@ -22,7 +22,7 @@ public class Bibliotheque1 {
 		}
 	}
 
-	boolean rendreLivre(String nom) {
+	public boolean rendre(String nom) {
 		Livre l =liste.get(nom);
 		if(l!=null) {
 			l.rendre();	
@@ -42,6 +42,16 @@ public class Bibliotheque1 {
 	@Override
 	public String toString() {
 		return "Bibliotheque [liste=" + liste + "]";
+	}
+
+
+	@Override
+	public void ajouter(String nom, MediaEnum mediaEnum) {
+		Media media = null ;
+		if (MediaEnum.LIVRE == mediaEnum) media = new Livre(nom);
+		if (MediaEnum.DVD == mediaEnum) media = new Dvd(nom);
+		liste.put(nom, media);
+		
 	}
 	
 
